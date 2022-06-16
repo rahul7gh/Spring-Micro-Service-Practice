@@ -1,0 +1,49 @@
+What is SPring cloud:- Collection of different projects each of which provides a esy wy to
+satisy the common patterns observed in any miroservice based application.
+Many of these projects are based on projects created by different organization.
+
+1. Spring Cloud Config :- All application config data such environment details is accssed
+thoruh a cetralized service rather than hardcoding it somewhere within the applicatiion itself
+
+This ensures that no matter how many instances of MicroService exist tey all will have same
+configuration.
+This proj has its own property manageent repo but can also integrate with OpenSource Project such as
+Git,Consul,Eureka,etc.
+
+2.Spring coud service discovery: Hardcoding the Microservice endpoints will reult
+in very poor change management. Lso or clients to keep track of tese becomes a tedious task.
+This proj allows to map a mircoservices to logical names,Through registraion and deregs. framework
+
+Consul,ZooKeeper and Eureka are most widely used.
+
+3.Spring Cloud Load Balamcer and Resillience4j:-
+A Robust fraemwork to handle the failures as well as the effective usage of avilable 
+microservice instances.
+
+4.Spring cloud API Gateway:-
+ENsure all calls are passed torugh a single front door. Soo all the actual working services
+are behnid this project. ALlows us to configure authentication and authorizzation
+in a cetralized manner.
+Basically it routes requests to appropriate applicatins.
+
+5.Spring Cloud Stream: easy integration of asynchrnous messaginginto you application.
+
+6.SPring Cloud sleuth:- allows tarcking particular transaction in your ecosystem through
+a framework of identifiers.Real power comes when this is integrated with logging aplications
+such as ELK stak,Zipkin,etc.
+
+7.Spring Cloud Security:
+authentiation and authorizaton project. Great suppot to implement entire security 
+using token based approach based on Oauth2 and JWTs. 
+ 
+RestTemplate class is configured to work with Sevice discovry as well as 
+load balancing. so all you need to do is configure your applicaton with a discovery 
+microservice and you are good to go.
+
+Such client side balancing has advangate over centrlized load balancer as if te cenralized one goes down 
+entire ecosystem gets diturbed.
+
+
+ 
+
+ 
