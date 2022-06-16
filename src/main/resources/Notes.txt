@@ -44,6 +44,21 @@ Such client side balancing has advangate over centrlized load balancer as if te 
 entire ecosystem gets diturbed.
 
 
+ <New-Content>
+ Internationalization:- application that can work in multiple languages and format.
+ So based on the "Locale" Property of incoming request we decide which 
+ languge to choose.
  
+ in our example the files will be "messages_<localeName>.properties"
+ and by default if locale is not found it looks for "messages.properties"
+ and if we don't provide it will use whatevr confgiyred in the services.
+ 
+ in each of these files we have key-value pairs.
+ keys are same in all the files we change values wrt to the locale and langauge.
+ so code will read the values from the respective file and messages.
+ 
+ How will we get Locale from request:-
+  Request Header named "Accept-Language".
+   we can map this with Locale Object.
 
  
