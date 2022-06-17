@@ -61,4 +61,66 @@ entire ecosystem gets diturbed.
   Request Header named "Accept-Language".
    we can map this with Locale Object.
 
+<New Content>
+ Heateos:- Hypermedia as the ngine of application state 
+ a small project based on hateos principle which states that the json response should have
+ a set of related links to the json response in the context. you can use this api to quickly configure links.
+ 
+ ACtuator:- Microservices in complex env may have 1000s of runnning instances so keeping tract of them wheteher they
+ work properly or failing is a tedious task.
+ also clients will be communicating to our application via service discovery application. so this component must be
+ able to check on these instances and take actions usch as removing insances , notifying stake holders and bringing up
+ other instances. this health check facility is provided by actuator which exposes an api to provide info on all your services.
+ 
+ Deployment:- fast,easy and scalable solution is to use containers. Docker as the container engine.
+ 
+** to automatically build images we have 2 options:-
+ I]. com.spotify.dockerfile-maven-plugin :- this needs to be configured using maven goal and by providing
+ our own docker filel in projects root directoy;
+ ***********Note that all the files such as jar must also be in the child directory as the dokcer file..that is
+ all the reqd resources must be available on contextdirectory of docker file.
+ use some other plugin to copy your buil artifacts to docker context directry of your project.
+ and execute the docker image buil goal via maven pom.xml
+ 
+ There are several ways to build a dockerfile effectively:-
+ 1. basic:- directly copy the Jar file and execute it via entry point.
+ 2.mulltistage builds:- 2 stage process where we first put our jar in one image and in 2nd stage we extract and run it 
+ as Java applicaton 
+ 
+ #mvn package dockerfile:build    ===> you use this goal to execute and build the image.
+ 
+ II] from spring booot 2.4.0 and if you have docker and coker compose installed you can use the feature given by spring 
+ itself
+ Buildpacks are tools that provide application  and framework dependencies transforming our source code runnable aplication image
+ directly.
+ 
+ #spring-boot:build-image    ===> executing this goal will generate a completely ready docker image.
+ 
+ <plugin>
+ <groupId>org.springframework.boot</groupId>
+ <artifactId>spring-boot-maven-plugin</artifactId>
+ <configuration>
+ <image>
+ <name>${docker.image.prefix}/${project.artifactId}:latest</name>
+ </image>
+ </configuration>
+</plugin>
+
+you can change configuration by using above plugin configuation.
+
+once the image is built we ca execute it as follow to spin up a conatiner..we can map it to a port on your host system.
+#docker run -it -p8080:8080 docker.io/library/licensing-service:0.0.1-SNAPSHOT
+ 
+ the porblem with above two apporach is that everything right from the scarcth need to be added to docker images.
+ when you add an instrcution a seprate layer gets added in image which is reusable.
+ 
+ the Third approach allows our application to be divided innto layers based on how likely it is to change
+ for example libs,dependncies may not change that frequenlty while the application code changes frequnetly
+ so subsequent builds will have a new application alyer thereby making it faster.
+ 
+ refer to book for more info. page no, 106 (Layered Jars)
+ 
+ 
+ 
+ 
  
