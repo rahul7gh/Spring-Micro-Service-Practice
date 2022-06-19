@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
+import com.optimagrowth.license.config.ServiceConfig;
 import com.optimagrowth.license.model.License;
 
 @Service
@@ -15,13 +16,16 @@ public class LicenseService {
 	@Autowired
 	MessageSource messageSource;
 	
+	@Autowired
+	ServiceConfig config;
+	
 	public License getLicense(String licenseId,String organizationId)
 	{
 		License license= new License();
 		license.setId(new Random().nextInt(1000));
 		license.setOrganizationId(organizationId);
 		license.setLicenseId(licenseId);
-		license.setDescription("Software Product!");
+		license.setDescription("Software Product!"+ "-" +config.getEnvtype());
 		license.setProductName("Ostock");
 		license.setLicenseType("full");
 		

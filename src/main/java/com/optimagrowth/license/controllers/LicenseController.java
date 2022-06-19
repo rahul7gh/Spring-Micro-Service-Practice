@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.optimagrowth.license.config.ServiceConfig;
 import com.optimagrowth.license.model.License;
 import com.optimagrowth.license.services.LicenseService;
 
@@ -25,6 +26,8 @@ public class LicenseController {
 	
 	@Autowired
 	LicenseService licenseService;
+	
+	
 	
 	@RequestMapping(value="/{licenseId}",method = RequestMethod.GET)
 	public ResponseEntity<License> getLicense(@PathVariable String organizationId,@PathVariable String licenseId)

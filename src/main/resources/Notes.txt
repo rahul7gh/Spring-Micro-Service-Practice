@@ -132,6 +132,48 @@ once the image is built we ca execute it as follow to spin up a conatiner..we ca
  
  There arae several open source projects available such as EUreka,ZooKeeper,etcd,Consul,Spring Cloud Config Server,etc.
  
+ <new -content>
+ The microservice will connect to different databases and other application based on the environmenst.
+ The core part of the application that  is the processing is never touched .
  
+ Now we want our Li-mi-ser to connect with the config servere before starting the application beacuse without teh config info
+ we can nnot srtart the micro service.
+ So we can provide details of our config server in bootstrap.yml, JVM argumanets(Java env variables)
+ 
+ ***********To make the application read data from a bootstrap file you must include the following
+ dependecy.
+ 		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bootstrap</artifactId>
+			<version>3.1.3</version>
+		</dependency>
+ 
+ also if you don't include this you might run into:
+ No spring.config.import property has been defined
+ 
+ error.
+ 
+ Once you this dependency set up the application during startup will hit the config server with the profile that
+ you have set in the bootstrap file.
+ if you don't set a profile it will pick up default properties.
+ 
+ ***********
+
+
+now that the application is up and runnning all the standard properties will be utilized by your spring appliatiion "auto-magically"
+. But what about some custom propes that your application specificall needs?
+
+For that 
+we create a class ServiceConfig.
+
+How do you make sure you app gets latest properties if config repo gets updated.....
+Rest assured if you read from an endpoint you will get updated lastes version of values.
+
+now for the application it read data only on startup so how to make it read to refresh the data on changes...
+Spring boot actuator offers a @RefreshScope annotation with /refresh endpoit that will realod only the CUSTOM
+PROPERTIES not the spinng spefici props.
+
+also note that....by default all the actuator endpoints are not active we nee congiure it using a property in app.properties.
+after taht we can hit /refresh with POST request,
  
  
