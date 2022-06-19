@@ -1,0 +1,24 @@
+Spring Cloud is collection of indivisual projects so they don't actual come under a single groupId. To keep all the projects dependecueies
+and versions comptable the SPing team releases thema under what they call a "release Train".To refer to  apericular release train
+version we have "<dependencyManagement>" tag which is used to specify BOM(Billl of Models) for release train.
+
+Spring Cloud projects have one more config file boostrap.prperties or.yml which is loaded before the application.prop or yml file
+it is used to store core config properties which are not specfic to this appliation but entire ecosystem as whole.
+Specifically boostrap file is used by parent ApplicationContext.
+
+ The serach-locations provided in bootstrap file will require files for each microservices with following
+ naming conention:-  appname-envname.yml or .properties
+ 
+ when there is no env specified spring boot will load the default application properties file.
+ and when you have a spefi env specified it will load up that file. and return the properies in a json response.
+ in case of env specifi request both default and env properties are returned. due to the way spring reslves these urls .
+  
+ 
+ http://localhost:8071/licensing-service/default
+ http://localhost:8071/licensing-service/dev
+ http://localhost:8071/licensing-service/prod
+ 
+ ***********************For some reason Spring config server is not reading data from the Bootstrap.yml
+  so i have put it in applicatio.yml*************** 
+
+

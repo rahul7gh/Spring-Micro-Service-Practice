@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: ostock-config-server
+  profiles:
+    #Imporatnat property that informs spring that the config data needs to be read from the filesysytem.
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          #The file can be anywhere on filesystem or on the classpath. This native profiled way does not use any git or VCS.
+          #search-locations: file:///<FilePath>
+          #classpath refers to the location "src/main/resources so below serach location will go to src/main/resources/config"
+          search-locations: classpath:/config
+         
+server:
+  port: 8071 
