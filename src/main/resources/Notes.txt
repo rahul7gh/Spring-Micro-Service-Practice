@@ -121,6 +121,17 @@ once the image is built we ca execute it as follow to spin up a conatiner..we ca
  refer to book for more info. page no, 106 (Layered Jars)
  
  
+ <New-Content> The Configuartion data must be completely separted from the application. so we must version control the 
+ confgiyartion data. Also instead of making your micrservices read from repositories directly have a centralized service
+ takin care of fetching and managing the information.
+ 
+ SO when a microservice starts it will hit the endpoint and get the reqd info.
+ this allows our application to work irrespective of actual datastores used to hold our config data.
+ Also now that config is being managed separately....if itchanges all the servcies must be notified to refresh the
+ configs that they have been using.
+ 
+ There arae several open source projects available such as EUreka,ZooKeeper,etcd,Consul,Spring Cloud Config Server,etc.
+ 
  
  
  
