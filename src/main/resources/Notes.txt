@@ -18,7 +18,12 @@ Specifically boostrap file is used by parent ApplicationContext.
  http://localhost:8071/licensing-service/dev
  http://localhost:8071/licensing-service/prod
  
+ Now you can featch config data suhc database urls,etc...reqired by your mircoservice to setup from this service.
+ 
  ***********************For some reason Spring config server is not reading data from the Bootstrap.yml
   so i have put it in applicatio.yml*************** 
-
+  
+<><>git commit -m "Completed File Based Repository Config server.Th problem of not b
+eing able to load bootstrap file was beacuse the dependency was missing"
+<>
 
