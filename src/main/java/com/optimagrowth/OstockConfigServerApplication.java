@@ -6,10 +6,10 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 
 @SpringBootApplication
 @EnableConfigServer
-public class SpringMicroservicesApplication {
+public class OstockConfigServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringMicroservicesApplication.class, args);
+		SpringApplication.run(OstockConfigServerApplication.class, args);
 	}
 
 }

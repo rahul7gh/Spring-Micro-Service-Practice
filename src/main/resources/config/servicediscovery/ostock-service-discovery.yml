@@ -1,0 +1,29 @@
+server:
+  port: 8990
+
+eureka:
+  instance:
+    hostname: localhost
+    
+  client:
+  
+    #Tells Config Server not regsiter with Eureka when eureka is up and running.
+    registerWithEureka: false
+    
+    #Tells eureka server not to cache the discovery regsitry information.
+    fetchRegistry: false
+    
+    #Url where eureka server takes requests
+    serviceUrl:
+      defaultZone:
+        http://${eureka.instance.hostname}:${server.port}/eureka
+  server:
+  
+    #Sets the time to wait before th eureka starts accepting requests(milliseconds)
+    #By default eureka waits for 5 mins before advertising any services that registers with Eureka.This is down to allow all services
+    #to reister. so to speed up things in our local env we set it to 5 ms.
+    #also before regsitering with eureka the service must send 3 consecutive heartbeat pings 10sec apart. So each 30 sec of time 
+    #is required for regstering each service.
+    waitTimeInMsWhenSyncEmpty: 5
+      
+    

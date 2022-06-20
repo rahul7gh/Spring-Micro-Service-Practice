@@ -3,15 +3,29 @@ spring:
     name: ostock-config-server
   profiles:
     #Imporatnat property that informs spring that the config data needs to be read from the filesysytem.
-    active: native
+    active:
+      #native
+      git
   cloud:
     config:
       server:
-        native:
+        #native:
           #The file can be anywhere on filesystem or on the classpath. This native profiled way does not use any git or VCS.
           #search-locations: file:///<FilePath>
           #classpath refers to the location "src/main/resources so below serach location will go to src/main/resources/config"
-          search-locations: classpath:/config
+          #search-locations: classpath:/config
+        git:
+          uri: https://github.com/rahul7gh/ostock-config-repo.git
+          
+          #The value for this attribute is comma seperated list one entry for each service
+          #in these folders it will look for all the config files. The way to resolve the files is same "appname-env"
+          searchPaths: licensingservice,servicediscovery
          
 server:
   port: 8071 
+  
+#This is env varibale if set makes spring use symmetric encryption to encrypt data in the config files. You can also pass it via args
+# now yo can invoke  /encrypt wth values you want to encrypt in body with post request and store them in config files.
+#Follow some tutorial for exact implementation details
+#encrypt:
+#  key: IMSYMMETRIC
