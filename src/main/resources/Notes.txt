@@ -1,0 +1,43 @@
+service discovery solves the problem of locating/ invoking a service withut actaully having ts ip and other info. 
+this way we separatout the actual locatons and refer to services via logical name which will be mapped to actaul application/service
+by this service discovery agent.
+
+How  a traditional architecture would do service discovery:-
+
+A DNS server that locates services based on resurces
+eg .. ostock.services-dic.com/serviceA
+eg .. ostock.services-dic.com/serviceB
+eg .. ostock.services-dic.com/serviceC
+
+the Load Balancer service on the DNS sever locates the actual instnces and send data to actaul service
+
+The Clou-based architecture allows Microservices to tell the service dicoery agent rather than configuring locations of services
+within the ser-disc agent.
+
+Also to facillitate more robus and scalable env. multiple instances of ser-dic application are a co exist acting as a culster
+that has info of all available services.
+
+1)Client apps connect with ser-dic agent cluster to fetch physical location based on a logical name of service.
+2)The actual microservices when come online regsiters themselves with the ser-disc agent using their own ip address.
+3).All the mircoservices instnaces have a endpoint exposed to keep track of health which will be continuosly used by ser-disc 
+cluster to monitor the health.
+4)when a micr-ser instance dies the ser-discclsuter will not route any request to that instances..tey may even be able to bring 
+up a new instance of the failing service.
+
+
+
+********Note that this cluster is not load balanced because this makes all the clients heavily dependent on the service discovery agent
+to avoid this dependcy the actual load balancing happens at clients that are using or microservices by using a local cache:-
+
+1.The client first checks for the service it needs in its cache if the info is not available it goes to service discovery cluster 
+and caches the info recievd that will be used for next invocations.
+
+now the client has all instances info of a microservice ecah client will have simple round robin algo that will invoke them one by one
+to spread the load across the service.
+In this way even if the service discovery agent cluster goes down clients can use theier cache to continue business.
+
+Also now that clients are using cache how would they know if an instnace has died?...fo this the cache keeps on 
+getting refreshed periodically.
+also if a service calls fail after using cached info a refresh call is made and fresh data is used to cnnect to service.
+
+****

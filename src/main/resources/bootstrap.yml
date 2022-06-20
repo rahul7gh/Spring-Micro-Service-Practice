@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: ostock-service-discovery
+  
+  cloud:
+    config:
+      uri: http://localhost:8071/
+    
+    loadbalancer:
+      ribbon:
+        enabled: false
+    
