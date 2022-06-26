@@ -41,3 +41,8 @@ getting refreshed periodically.
 also if a service calls fail after using cached info a refresh call is made and fresh data is used to cnnect to service.
 
 ****
+http://localhost:8070/eureka/apps/organization-service.
+to see a particular services instances
+
+http://localhost:8070
+Eureka Dashboard
