@@ -48,6 +48,12 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<version>3.1.3</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -74,6 +80,13 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>
+			 	spring-cloud-starter-netflix-eureka-client
+			 </artifactId>
+			<version>3.1.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -85,61 +98,19 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-
-
-				<executions>
-					<execution>
-						<id>copy-docker-context</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-
-						<configuration>
-							<outputDirectory>${basedir}/src/main/resources/docker-context-directory</outputDirectory>
-							<resources>
-								<resource>
-									<directory>${basedir}/target/</directory>
-									<includes>
-										<include>${project.build.finalName}.jar</include>
-									</includes>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>dockerfile-maven-plugin</artifactId>
-				<version>1.4.13</version>
-				<executions>
-					<execution>
-						<id>Building Docker Image</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>build</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<contextDirectory>
-						${basedir}/src/main/resources/docker-context-directory
-					</contextDirectory>
-					<repository>ostock/license-microservice</repository>
-					<tag>${project.version}</tag>
-					<buildArgs>
-						<project_build_finalName>
-							${project.build.finalName}
-						</project_build_finalName>
-					</buildArgs>
-				</configuration>
-			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-resources-plugin</artifactId> 
+				<executions> <execution> <id>copy-docker-context</id> <phase>pre-integration-test</phase> 
+				<goals> <goal>copy-resources</goal> </goals> <configuration> <outputDirectory>${basedir}/src/main/resources/docker-context-directory</outputDirectory> 
+				<resources> <resource> <directory>${basedir}/target/</directory> <includes> 
+				<include>${project.build.finalName}.jar</include> </includes> </resource> 
+				</resources> </configuration> </execution> </executions> </plugin> <plugin> 
+				<groupId>com.spotify</groupId> <artifactId>dockerfile-maven-plugin</artifactId> 
+				<version>1.4.13</version> <executions> <execution> <id>Building Docker Image</id> 
+				<phase>pre-integration-test</phase> <goals> <goal>build</goal> </goals> </execution> 
+				</executions> <configuration> <contextDirectory> ${basedir}/src/main/resources/docker-context-directory 
+				</contextDirectory> <repository>ostock/license-microservice</repository> 
+				<tag>${project.version}</tag> <buildArgs> <project_build_finalName> ${project.build.finalName} 
+				</project_build_finalName> </buildArgs> </configuration> </plugin> -->
 		</plugins>
 	</build>
 </project>
