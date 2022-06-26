@@ -19,7 +19,7 @@ spring:
           
           #The value for this attribute is comma seperated list one entry for each service
           #in these folders it will look for all the config files. The way to resolve the files is same "appname-env"
-          searchPaths: licensingservice,servicediscovery
+          searchPaths: licensingservice,servicediscovery,organizationservice
          
 server:
   port: 8071 

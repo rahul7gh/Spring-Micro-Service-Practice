@@ -1,6 +1,3 @@
-server:
-  port: 8990
-
 eureka:
   instance:
     hostname: localhost
@@ -16,6 +13,8 @@ eureka:
     #Url where eureka server takes requests
     serviceUrl:
       defaultZone:
+      #we can have multiple euraka servers sperated by comma below. but they must act like a cluster so that they can share 
+      #info wth eachother
         http://${eureka.instance.hostname}:${server.port}/eureka
   server:
   
